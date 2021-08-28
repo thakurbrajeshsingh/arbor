@@ -11,8 +11,7 @@ import {
 } from "@material-ui/core";
 
 import SearchBar from "./SearchBar";
-
-
+import HeaderButton from "./HeaderButton";
 
 const useStyle = makeStyles({
   header: {
@@ -32,22 +31,19 @@ const useStyle = makeStyles({
   },
   component: {
     marginLeft: "12%",
-    lineHeight:0
+    lineHeight: 0,
   },
   subHeading: {
     fontSize: 10,
-    fontStyle:'italic'
-
+    fontStyle: "italic",
   },
 });
 
-const ToolBar =withStyles({
-    root:{
-        minHeight:55
-    }
+const ToolBar = withStyles({
+  root: {
+    minHeight: 55,
+  },
 })(Toolbar);
-
-
 
 const Header = () => {
   const classes = useStyle();
@@ -64,12 +60,17 @@ const Header = () => {
             <img src={logoURL} alt="logo" className={classes.logo} />
             <Box className={classes.container}>
               <Typography className={classes.subHeading}>
-                Explore <Box component='span' style={{color:'#FFE500'}}> Plus</Box>
+                Explore{" "}
+                <Box component="span" style={{ color: "#FFE500" }}>
+                  {" "}
+                  Plus
+                </Box>
               </Typography>
               <img src={subURL} alt="explore logo" className={classes.subURL} />
             </Box>
           </Box>
           <SearchBar />
+          <HeaderButton />
         </ToolBar>
       </AppBar>
     </>

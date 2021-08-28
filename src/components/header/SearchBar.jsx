@@ -14,16 +14,15 @@ const useStyle = makeStyles((theme) => ({
     padding: 5,
     height: "100%",
     display: "flex",
-    color:'blue'
+    color: "#2874f0",
   },
   inputRoot: {
-    fontSize:'unset',
+    fontSize: "unset",
     width: "100%",
-    color:"grey"
-    
+    color: "grey",
   },
   inputInput: {
-    paddingLeft:20,
+    paddingLeft: 20,
   },
 }));
 
