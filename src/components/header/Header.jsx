@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 
 import {
   AppBar,
@@ -32,6 +32,8 @@ const useStyle = makeStyles({
   component: {
     marginLeft: "12%",
     lineHeight: 0,
+    textDecoration: "none",
+    color:"#ffffff"
   },
   subHeading: {
     fontSize: 10,
@@ -56,7 +58,7 @@ const Header = () => {
     <>
       <AppBar className={classes.header}>
         <ToolBar>
-          <Box className={classes.component}>
+          <Link to="/" className={classes.component}>
             <img src={logoURL} alt="logo" className={classes.logo} />
             <Box className={classes.container}>
               <Typography className={classes.subHeading}>
@@ -68,7 +70,7 @@ const Header = () => {
               </Typography>
               <img src={subURL} alt="explore logo" className={classes.subURL} />
             </Box>
-          </Box>
+          </Link>
           <SearchBar />
           <HeaderButton />
         </ToolBar>
