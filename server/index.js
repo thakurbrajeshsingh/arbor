@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 
 // components
 import Connection from "./database/db.js";
+import DefaultData from "./default.js";
 
 
 const PORT = 8000;
@@ -21,3 +22,6 @@ app.listen(PORT, (err) => {
     }
     console.log(`Arbor Backend Running Successful On Port: ${PORT}`)
 })
+
+// deafault data to database
+DefaultData();
