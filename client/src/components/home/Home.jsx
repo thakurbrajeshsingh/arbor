@@ -12,9 +12,9 @@ const useStyle = makeStyles({
   },
   rightWrapper: {
     background: "#FFFFFF",
-    padding:"5px",
-    margin:"12px 0 0 10px",
-    width:"17%"
+    padding: "5px",
+    margin: "12px 0 0 10px",
+    width: "17%",
   },
 });
 
@@ -30,13 +30,18 @@ const Home = () => {
         <Banner />
         <Box style={{ display: "flex" }}>
           <Box style={{ width: "83%" }}>
-            <Slide />
+            <Slide timer={true} title="Deal of the Day" />
           </Box>
           <Box className={classes.rightWrapper}>
-            <img src={adURL} alt="Ads" style={{ width: 210}} />
+            <img src={adURL} alt="Ads" style={{ width: 210 }} />
           </Box>
         </Box>
-        
+        <Slide timer={false} title="Deal of the Day" />
+        <Slide timer={false} title="Discount for you" />
+        <Slide timer={false} title="Suggested Items" />
+        <Slide timer={false} title="Top Selection" />
+        <Slide timer={false} title="Recommended Items" />
+        <Slide timer={false} title="Best Seller" />
       </Box>
     </>
   );

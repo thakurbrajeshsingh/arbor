@@ -11,6 +11,7 @@ import Countdown from "react-countdown";
 
 // Components
 import { products } from "../../constants/Data";
+import React from "react";
 
 const useStyle = makeStyles({
   component: {
@@ -66,7 +67,7 @@ const responsive = {
   },
 };
 
-const Slide = () => {
+const Slide = ({ timer, title }) => {
   const classes = useStyle();
   const timerURL =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg";
@@ -83,16 +84,20 @@ const Slide = () => {
   return (
     <Box className={classes.component}>
       <Box className={classes.deal}>
-        <Typography className={classes.dealtext}>Deal of the Day</Typography>
-        <img src={timerURL} alt="deal timer" style={{ width: 24 }} />
-        <Countdown date={Date.now() + 5.04e7} renderer={renderer} />
-        <Button
-          variant={"contained"}
-          color={"primary"}
-          className={classes.button}
-        >
-          View All
-        </Button>
+        <Typography className={classes.dealtext}>{title}</Typography>
+        {timer && (
+          <>
+            <img src={timerURL} alt="deal timer" style={{ width: 24 }} />
+            <Countdown date={Date.now() + 5.04e7} renderer={renderer} />
+            <Button
+              variant={"contained"}
+              color={"primary"}
+              className={classes.button}
+            >
+              View All
+            </Button>
+          </>
+        )}
       </Box>
       <Divider />
       <Carousel
