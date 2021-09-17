@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
-import Slide from "./Slide";
+
 // Components
 import Navbar from "./Navbar";
 import Banner from "./Banner";
+import Slide from "./Slide";
+import Midsection from "./Midsection";
 
 const useStyle = makeStyles({
   components: {
@@ -36,6 +38,7 @@ const Home = () => {
             <img src={adURL} alt="Ads" style={{ width: 210 }} />
           </Box>
         </Box>
+        <Midsection />
         <Slide timer={false} title="Deal of the Day" />
         <Slide timer={false} title="Discount for you" />
         <Slide timer={false} title="Suggested Items" />
