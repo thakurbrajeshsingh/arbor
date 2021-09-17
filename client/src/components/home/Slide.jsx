@@ -1,6 +1,12 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Box, Typography, makeStyles } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  Button,
+  Divider,
+  makeStyles,
+} from "@material-ui/core";
 import Countdown from "react-countdown";
 
 // Components
@@ -17,6 +23,31 @@ const useStyle = makeStyles({
   },
   image: {
     height: 150,
+  },
+  dealtext: {
+    fontSize: 22,
+    fontWeight: 600,
+    lineHeight: "32px",
+    marginRight: 25,
+  },
+  timer: {
+    color: "#7f7f7f",
+    marginLeft: "10px",
+    display: "flex",
+    alignItems: "center",
+  },
+  button: {
+    marginLeft: "auto",
+    background: "#2874f0",
+    borderRadius: "2px",
+    fontSize: "13px",
+  },
+  text: {
+    fontSize: 14,
+    marginTop: 5,
+  },
+  wrapper: {
+    padding: "30px 15px",
   },
 });
 
@@ -42,17 +73,28 @@ const Slide = () => {
 
   const renderer = ({ hours, minutes, seconds }) => {
     return (
-      <span> {hours}:{minutes}:{seconds} left</span>
+      <span className={classes.timer}>
+        {" "}
+        {hours}:{minutes}:{seconds} left
+      </span>
     );
   };
 
   return (
     <Box className={classes.component}>
       <Box className={classes.deal}>
-        <Typography>Deal of the Day</Typography>
-        <Countdown date={Date.now() + 5.04e7} renderer={renderer} />
+        <Typography className={classes.dealtext}>Deal of the Day</Typography>
         <img src={timerURL} alt="deal timer" style={{ width: 24 }} />
+        <Countdown date={Date.now() + 5.04e7} renderer={renderer} />
+        <Button
+          variant={"contained"}
+          color={"primary"}
+          className={classes.button}
+        >
+          View All
+        </Button>
       </Box>
+      <Divider />
       <Carousel
         responsive={responsive}
         infinite={true}
@@ -69,7 +111,24 @@ const Slide = () => {
         containerClass="carousel-container"
       >
         {products.map((product) => (
-          <img src={product.url} className={classes.image} />
+          <Box textAlign="center" className={classes.wrapper}>
+            <img src={product.url} className={classes.image} />
+            <Typography
+              classname={classes.text}
+              style={{ fontWeight: 600, color: "#212121" }}
+            >
+              {product.title.shortTitle}
+            </Typography>
+            <Typography classname={classes.text} style={{ color: "green" }}>
+              {product.discount}
+            </Typography>
+            <Typography
+              classname={classes.text}
+              style={{ color: "#212121", opacity: "0.6" }}
+            >
+              {product.tagline}
+            </Typography>
+          </Box>
         ))}
       </Carousel>
     </Box>
