@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 const HeaderButton = () => {
   const classes = useStyles();
-  const [open, setOpen] = useState();
+  const [open, setOpen] = useState(false);
 
   // Header Login Button Click
   const openDialog = () => {
@@ -62,7 +62,7 @@ const HeaderButton = () => {
           </Badge>
           <Typography style={{ marginLeft: 10 }}>Cart</Typography>
         </Link>
-        <LoginDialog open={open} setOpen={setOpen}></LoginDialog>
+        <LoginDialog open={open} setOpen={setOpen} />
       </Box>
     </>
   );
