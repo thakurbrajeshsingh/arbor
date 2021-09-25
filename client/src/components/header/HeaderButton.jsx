@@ -40,31 +40,29 @@ const HeaderButton = () => {
     setOpen(true);
   };
 
-
   return (
-    <>
-      <Box className={classes.wrapper}>
-        <Link>
-          <Button
-            variant="contained"
-            onClick={openDialog}
-            className={classes.login}
-          >
-            Login
-          </Button>
-        </Link>
-        <Link>
-          <Typography style={{ marginTop: 2 }}>More</Typography>
-        </Link>
-        <Link to="/cart" className={classes.container}>
-          <Badge badgeContent={4} color="secondary">
-            <ShoppingCart />
-          </Badge>
-          <Typography style={{ marginLeft: 10 }}>Cart</Typography>
-        </Link>
-        <LoginDialog open={open} setOpen={setOpen} />
-      </Box>
-    </>
+    <Box className={classes.wrapper}>
+      <Link to='/'>
+        <Button
+          className={classes.login}
+          variant="contained"
+          onClick={() => openDialog()}
+        >
+          Login
+        </Button>
+      </Link>
+
+      <Link>
+        <Typography style={{ marginTop: 2 }}>More</Typography>
+      </Link>
+      <Link to="/cart" className={classes.container}>
+        <Badge badgeContent={4} color="secondary">
+          <ShoppingCart />
+        </Badge>
+        <Typography style={{ marginLeft: 10 }}>Cart</Typography>
+      </Link>
+      <LoginDialog open={open} setOpen={setOpen} />
+    </Box>
   );
 };
 
