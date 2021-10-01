@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import { useState } from "react";
 
 const useStyles = makeStyles({
   component: {
@@ -62,48 +63,95 @@ const useStyles = makeStyles({
     fontWeight: 600,
     cursor: "pointer",
   },
+  signup: {
+    padding: "25px 35px",
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    "& > *": {
+      marginTop: 13,
+    },
+  },
 });
+
+const initialValue = {
+  login: {
+    view: "login",
+    heading: "Login",
+    subHeading: "Get Access to your orders,wishlist and Recommendations",
+  },
+  signup: {
+    view: "signup",
+    heading: "Looks like you are new here!!!",
+    subHeading: "Sign up with your mobile number to get Started",
+  },
+};
 
 const Login = ({ open, setOpen }) => {
   const classes = useStyles();
 
+  const [account, setAccount] = useState(initialValue.login);
+
   const handleClose = () => {
     setOpen(false);
+    setAccount(initialValue.login);
   };
 
+  const toggleAccount = () => {
+    setAccount(initialValue.signup);
+  };
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent className={classes.component}>
         <Box style={{ display: "flex" }}>
           <Box className={classes.image}>
-            <Typography variant="h5">Login</Typography>
+            <Typography variant="h5">{account.heading}</Typography>
             <Typography style={{ marginTop: "20px" }}>
-              Get Access to your orders,wishlist and Recommendations
+              {account.subHeading}
             </Typography>
           </Box>
-          <Box className={classes.login}>
-            <TextField name="username" label="Enter Email/Mobile Number" />
-            <TextField name="password" label="Enter Password" />
-            <Typography className={classes.text}>
-              By continuing, you agree to Flipkart's Terms of use of Privacy
-              Policy
-            </Typography>
-            <Button variant="contained" className={classes.loginBtn}>
-              Login
-            </Button>
-            <Typography
-              style={{ textAlign: "center" }}
-              className={classes.text}
-            >
-              OR
-            </Typography>
-            <Button variant="contained" className={classes.requestBtn}>
-              Request OTP
-            </Button>
-            <Typography className={classes.createText}>
-              New to Flipkart? Create Account{" "}
-            </Typography>
-          </Box>
+          {account.view === "login" ? 
+            // Sign-In Account
+            <Box className={classes.login}>
+              <TextField name="username" label="Enter Email/Mobile Number" />
+              <TextField name="password" label="Enter Password" />
+              <Typography className={classes.text}>
+                By continuing, you agree to Flipkart's Terms of use of Privacy
+                Policy
+              </Typography>
+              <Button variant="contained" className={classes.loginBtn}>
+                Login
+              </Button>
+              <Typography
+                style={{ textAlign: "center" }}
+                className={classes.text}
+              >
+                OR
+              </Typography>
+              <Button variant="contained" className={classes.requestBtn}>
+                Request OTP
+              </Button>
+              <Typography
+                onClick={toggleAccount}
+                className={classes.createText}
+              >
+                New to Flipkart? Create Account
+              </Typography>
+            </Box>
+           : 
+            // Signup   State Change
+            <Box className={classes.signup}>
+              <TextField name="firstname" label="Enter Firstname" />
+              <TextField name="lastname" label="Enter Lastname" />
+              <TextField name="username" label="Enter Username" />
+              <TextField name="email" label="Enter Email" />
+              <TextField name="password" label="Enter Password" />
+              <TextField name="phone" label="Enter Phone number" />
+              <Button variant="contained" className={classes.loginBtn}>
+                Signup
+              </Button>
+            </Box>
+          }
         </Box>
       </DialogContent>
     </Dialog>
