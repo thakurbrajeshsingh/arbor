@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useState } from "react";
+import { authenticatesignup } from "../../service/api";
 
 const useStyles = makeStyles({
   component: {
@@ -87,10 +88,20 @@ const initialValue = {
   },
 };
 
+const signupInitialValues = {
+  firstname: "",
+  lastname: "",
+  username: "",
+  email: "",
+  password: "",
+  phone: "",
+};
+
 const Login = ({ open, setOpen }) => {
   const classes = useStyles();
 
   const [account, setAccount] = useState(initialValue.login);
+  const [signup, setsignup] = useState(signupInitialValues);
 
   const handleClose = () => {
     setOpen(false);
@@ -100,6 +111,17 @@ const Login = ({ open, setOpen }) => {
   const toggleAccount = () => {
     setAccount(initialValue.signup);
   };
+
+  const signupUser = async () => {
+    let response = await authenticatesignup(signup);
+    if (!response) return;
+    handleClose();
+  };
+
+  const onInputChange = (e) => {
+    setsignup({ ...signup, [e.target.name]: e.target.value });
+  };
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent className={classes.component}>
@@ -110,7 +132,7 @@ const Login = ({ open, setOpen }) => {
               {account.subHeading}
             </Typography>
           </Box>
-          {account.view === "login" ? 
+          {account.view === "login" ? (
             // Sign-In Account
             <Box className={classes.login}>
               <TextField name="username" label="Enter Email/Mobile Number" />
@@ -138,20 +160,48 @@ const Login = ({ open, setOpen }) => {
                 New to Flipkart? Create Account
               </Typography>
             </Box>
-           : 
+          ) : (
             // Signup   State Change
             <Box className={classes.signup}>
-              <TextField name="firstname" label="Enter Firstname" />
-              <TextField name="lastname" label="Enter Lastname" />
-              <TextField name="username" label="Enter Username" />
-              <TextField name="email" label="Enter Email" />
-              <TextField name="password" label="Enter Password" />
-              <TextField name="phone" label="Enter Phone number" />
-              <Button variant="contained" className={classes.loginBtn}>
+              <TextField
+                onChange={(e) => onInputChange(e)}
+                name="firstname"
+                label="Enter Firstname"
+              />
+              <TextField
+                onChange={(e) => onInputChange(e)}
+                name="lastname"
+                label="Enter Lastname"
+              />
+              <TextField
+                onChange={(e) => onInputChange(e)}
+                name="username"
+                label="Enter Username"
+              />
+              <TextField
+                onChange={(e) => onInputChange(e)}
+                name="email"
+                label="Enter Email"
+              />
+              <TextField
+                onChange={(e) => onInputChange(e)}
+                name="password"
+                label="Enter Password"
+              />
+              <TextField
+                onChange={(e) => onInputChange(e)}
+                name="phone"
+                label="Enter Phone number"
+              />
+              <Button
+                onClick={signupUser}
+                variant="contained"
+                className={classes.loginBtn}
+              >
                 Signup
               </Button>
             </Box>
-          }
+          )}
         </Box>
       </DialogContent>
     </Dialog>
