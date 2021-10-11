@@ -10,11 +10,10 @@ import Routes from './routes/routes.js';
 
 
 const PORT = 8000;
+
 const app = express();
-
-
-app.use(bodyParser.json({ extended: true }))
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.use('/', Routes);
 

@@ -8,11 +8,12 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Cart from './components/cart/Cart';
 import { TemplateProvider } from './template/TemplateProvider';
-
+import ContextProvider from './context/ContextProvider';
 
 const App = () => {
   return (
     <TemplateProvider>
+      <ContextProvider>
       <BrowserRouter>
         <Header />
         <Switch>
@@ -20,6 +21,7 @@ const App = () => {
           <Route exact path='/cart' component={Cart} />
         </Switch>
       </BrowserRouter>
+    </ContextProvider>
     </TemplateProvider>
   );
 }

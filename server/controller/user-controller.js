@@ -1,11 +1,11 @@
-import { request, response } from "express";
+
 import User from "../model/userSchema.js";
 
-export const userSignup = async (request,response) => {
+export const userSignup = async (request, response) => {
     try {
-        const exist = User.findOne({ fistname: request.body.username });
+        const exist = await User.findOne({ firstname: request.body.username });
         if (exist) {
-            return response.status(401).response("User Already Exist");
+            return response.status(401).json("User Already Exist");
         }
         const user = request.body;
         const newUser = User(user);
@@ -15,5 +15,3 @@ export const userSignup = async (request,response) => {
         console.log("Error", error.message);
     }
 }
-
-7608080897

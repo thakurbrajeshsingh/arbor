@@ -74,7 +74,6 @@ const useStyles = makeStyles({
     },
   },
 });
-
 const initialValue = {
   login: {
     view: "login",
@@ -87,7 +86,6 @@ const initialValue = {
     subHeading: "Sign up with your mobile number to get Started",
   },
 };
-
 const signupInitialValues = {
   firstname: "",
   lastname: "",
@@ -96,26 +94,26 @@ const signupInitialValues = {
   password: "",
   phone: "",
 };
-
-const Login = ({ open, setOpen }) => {
+const LoginDialog = ({ open, setOpen, setAccount }) => {
   const classes = useStyles();
 
-  const [account, setAccount] = useState(initialValue.login);
+  const [account, toggleAccount] = useState(initialValue.login);
   const [signup, setsignup] = useState(signupInitialValues);
 
   const handleClose = () => {
     setOpen(false);
-    setAccount(initialValue.login);
+    toggleAccount(initialValue.login);
   };
 
-  const toggleAccount = () => {
-    setAccount(initialValue.signup);
+  const toggleUserAccount = () => {
+    toggleAccount(initialValue.signup);
   };
 
   const signupUser = async () => {
     let response = await authenticatesignup(signup);
     if (!response) return;
     handleClose();
+    setAccount(signup.username);
   };
 
   const onInputChange = (e) => {
@@ -154,7 +152,7 @@ const Login = ({ open, setOpen }) => {
                 Request OTP
               </Button>
               <Typography
-                onClick={toggleAccount}
+                onClick={toggleUserAccount}
                 className={classes.createText}
               >
                 New to Flipkart? Create Account
@@ -207,5 +205,4 @@ const Login = ({ open, setOpen }) => {
     </Dialog>
   );
 };
-
-export default Login;
+export default LoginDialog;
