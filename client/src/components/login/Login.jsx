@@ -184,6 +184,7 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
               <TextField
                 onChange={(e) => onInputChange(e)}
                 name="password"
+                type="password"
                 label="Enter Password"
               />
               <TextField

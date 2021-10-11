@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // components
 import LoginDialog from "../login/Login";
 import { LoginContext } from "../../context/ContextProvider";
+import Profile from "./Profile";
 
 const useStyles = makeStyles({
   login: {
@@ -44,9 +45,9 @@ const HeaderButtons = () => {
 
   return (
     <Box className={classes.wrapper}>
-      {account ? 
-        <Typography>{account}</Typography>
-       : 
+      {account ? (
+        <Profile account={account} setAccount={setAccount} />
+      ) : (
         <Link to="/">
           <Button
             className={classes.login}
@@ -56,7 +57,7 @@ const HeaderButtons = () => {
             Login
           </Button>
         </Link>
-      }
+      )}
       <Link>
         <Typography style={{ marginTop: 2 }}>More</Typography>
       </Link>
