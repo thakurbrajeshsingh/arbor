@@ -3,7 +3,7 @@ import User from "../model/userSchema.js";
 
 export const userSignup = async (request, response) => {
     try {
-        const exist = await User.findOne({ firstname: request.body.username });
+        const exist = await User.findOne({ username: request.body.username });
         if (exist) {
             return response.status(401).json("User Already Exist");
         }
