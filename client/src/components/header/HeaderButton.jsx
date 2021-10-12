@@ -52,7 +52,7 @@ const HeaderButtons = () => {
           <Button
             className={classes.login}
             variant="contained"
-            onClick={() => openDialog()}
+            onClick={openDialog}
           >
             Login
           </Button>

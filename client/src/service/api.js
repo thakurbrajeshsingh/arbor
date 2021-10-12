@@ -12,6 +12,13 @@ export const authenticatesignup = (user) => {
 }
 
 
+export const authenticatelogin = (user) =>{
+    try {
+        return axios.post(`${url}login`,user)
+    } catch (error) {
+        console.log("Error while Calling Api")
+    }
+} 
 
 
-export default authenticatesignup;
+// export default authenticatesignup;

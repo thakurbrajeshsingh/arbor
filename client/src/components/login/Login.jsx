@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useState } from "react";
-import { authenticatesignup } from "../../service/api";
+import { authenticatesignup, authenticatelogin } from "../../service/api";
 
 const useStyles = makeStyles({
   component: {
@@ -94,11 +94,18 @@ const signupInitialValues = {
   password: "",
   phone: "",
 };
+
+const loginInitialValues = {
+  username: "",
+  password: "",
+};
+
 const LoginDialog = ({ open, setOpen, setAccount }) => {
   const classes = useStyles();
 
   const [account, toggleAccount] = useState(initialValue.login);
   const [signup, setsignup] = useState(signupInitialValues);
+  const [login, setLogin] = useState(loginInitialValues);
 
   const handleClose = () => {
     setOpen(false);
@@ -116,8 +123,19 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
     setAccount(signup.username);
   };
 
+  const loginUser = async () => {
+    let response = await authenticatelogin(login);
+    if (!response) return;
+    handleClose();
+    setAccount(login.username);
+  };
+
   const onInputChange = (e) => {
     setsignup({ ...signup, [e.target.name]: e.target.value });
+  };
+
+  const onValueChange = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
   };
 
   return (
@@ -133,13 +151,25 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
           {account.view === "login" ? (
             // Sign-In Account
             <Box className={classes.login}>
-              <TextField name="username" label="Enter Email/Mobile Number" />
-              <TextField name="password" label="Enter Password" />
+              <TextField
+                onChange={(e) => onValueChange(e)}
+                name="username"
+                label="Enter Email/Mobile Number"
+              />
+              <TextField
+                onChange={(e) => onValueChange(e)}
+                name="password"
+                label="Enter Password"
+              />
               <Typography className={classes.text}>
                 By continuing, you agree to Flipkart's Terms of use of Privacy
                 Policy
               </Typography>
-              <Button variant="contained" className={classes.loginBtn}>
+              <Button
+                onClick={loginUser}
+                variant="contained"
+                className={classes.loginBtn}
+              >
                 Login
               </Button>
               <Typography
